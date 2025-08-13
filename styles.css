@@ -1,11 +1,29 @@
 /* ==================================== Root and All ==================================== */
 
 :root {
-    --color1: #43283c;
-    --color2: #5a3344;
-    --color3: #7f4652;
-    --color4: #b06464;
-    --color5: #ec9079;
+    /* Base colors */
+    --plum-dark: #43283c;
+    --plum: #5a3344;
+    --rosewood: #7f4652;
+    --dusty-rose: #b06464;
+    --peach-rose: #ec9079;
+
+    /* Lighter tints */
+    --plum-tint: #6d4e61;
+    --rosewood-tint: #a66b75;
+    --dusty-rose-tint: #cc8a88;
+    --peach-tint: #f4b5a2;
+
+    /* Darker shades */
+    --plum-shade: #2e1c2a;
+    --rosewood-shade: #5d333a;
+    --dusty-rose-shade: #8f4e4e;
+    --peach-shade: #c8705d;
+
+    /* Neutrals */
+    --off-white: #faf8f7;
+    --soft-gray: #d7d5d4;
+    --charcoal: #2b2b2b;
 }
 
 * {
@@ -19,6 +37,8 @@ html, body {
     display: flex;
     flex-direction: column;
     height: 100%;
+    background-color: var(--peach-tint);
+    color: var(--off-white);
 }
 
 /* ==================================== Header, Main, and Footer  ==================================== */
@@ -31,16 +51,17 @@ main {
 
 footer {
     padding: 10px;
+    color: var(--off-white);
 }
 
 header {
-    background-color: var(--color5);
+    background-color: var(--peach-rose);
     padding: 20px 30px;
     width: 100%;
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    border-bottom: 2px solid var(--color4);
+    border-bottom: 2px solid var(--dusty-rose);
 }
 
 header > span {
@@ -48,8 +69,10 @@ header > span {
     margin: 0 auto;
     font-weight: 500;
     font-size: 2rem;
-    color: var(--color1);
+    color: var(--off-white);
 }
+
+/* ------------ Search Bar ------------*/
 
 .search-bar {
     justify-self: start;
@@ -59,8 +82,8 @@ header > span {
     display: flex;
     align-items: center;
     gap: 10px;
-    background-color: var(--color5);
-    border: 2px solid var(--color4);
+    background-color: var(--off-white);
+    border: 2px solid var(--dusty-rose);
     border-radius: 12px;
     padding: 8px 12px;
 }
@@ -70,22 +93,58 @@ header > span {
     outline: none;
     background: transparent;
     font-size: 1rem;
-    color: var(--color1);
+    color: var(--charcoal);
     width: 180px;
 }
 
+.fa-solid {
+    color: var(--charcoal);
+}
+
+/* ------------ Toggle Units Button ------------*/
+
 .toggle-units {
     font-size: 1.2rem;
-    color: var(--color1);
+    color: var(--charcoal);
     display: flex;
-    gap: 8px;
-    background-color: var(--color5);
-    padding: 6px 12px;
-    border: 2px solid var(--color4);
+    gap: 0;
+    background-color: var(--peach-tint);
+    padding: 0;
+    border: 2px solid var(--dusty-rose);
     border-radius: 12px;
     cursor: pointer;
     justify-self: end;
+    overflow: hidden;
 }
+
+.F-units, .C-units {
+    padding: 6px 12px;
+    flex: 1;
+    text-align: center;
+    border: none;
+    background: transparent;
+    font-weight: 500;
+    color: var(--charcoal);
+    user-select: none;
+}
+
+
+.F-units.active,
+.C-units.active {
+    background-color: var(--peach-rose);
+    color: var(--off-white);
+    font-weight: 700;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.F-units:not(.active):hover,
+.C-units:not(.active):hover {
+    background-color: var(--peach-shade);
+    color: var(--off-white);
+    font-weight: 700;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+}
+
 
 /* ==================================== Main Grid ==================================== */
 
@@ -100,8 +159,8 @@ header > span {
 }
 
 .today {
-  background-color: var(--color5);
-  border: 2px solid var(--color4);
+  background-color: var(--off-white);
+  border: 2px solid var(--dusty-rose);
   border-radius: 20px;
   padding: 30px;
   display: grid;
@@ -128,13 +187,13 @@ header > span {
   font-size: 3rem;
   font-weight: 700;
   line-height: 1;
-  color: var(--color1);
+  color: var(--plum-dark);
 }
 
 .hi-low {
   font-size: 1.3em;
   font-weight: 500;
-  color: var(--color1);
+  color: var(--plum-dark);
   display: flex;
   gap: 8px;
   align-items: center;
@@ -144,7 +203,7 @@ header > span {
   margin-top: 16px;
   font-size: clamp(1.1rem, 2vw, 1.6rem);
   font-weight: 600;
-  color: var(--color1);
+  color: var(--plum-dark);
   display: flex;
   align-items: baseline;
   gap: 6px;
@@ -157,33 +216,33 @@ header > span {
   grid-template-rows: repeat(5, 1fr);
   gap: 14px;
   padding-left: 24px;
-  border-left: 2px solid var(--color4);
+  border-left: 2px solid var(--dusty-rose);
 }
 
 .right-side .row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: var(--color5);
-  border: 1px solid var(--color4);
+  background: var(--rosewood-tint);
+  border: 1px solid var(--dusty-rose);
   border-radius: 12px;
   padding: 12px 14px;
 }
 
 .right-side .row p:first-child { 
-    font-weight: 500; color: var(--color1); 
+    font-weight: 500; color: var(--off-white); 
     margin-right: 5px;
 }
 .right-side .row p:last-child  { 
     font-weight: 600; 
-    color: var(--color1); 
+    color: var(--charcoal); 
 }
 
 /* ------------Bottom row (+1 / +2 / +3) ------------ */
 
 .next-3-days {
-  background-color: var(--color5);
-  border: 2px solid var(--color4);
+  background-color: var(--off-white);
+  border: 2px solid var(--dusty-rose);
   border-radius: 20px;
   padding: 20px;
   display: grid;
@@ -193,22 +252,23 @@ header > span {
 }
 
 .next-3-days > div {
-  background-color: var(--color5);
-  border: 1px solid var(--color4);
+  background-color: var(--rosewood-tint);
+  border: 1px solid var(--dusty-rose);
   border-radius: 12px;
   padding: 24px 16px;
+  color: var(--off-white);
 }
 
 .next-3-days h3 {
   font-size: 1.25rem;
-  color: var(--color1);
+  color: var(--charcoal);
   margin-bottom: 6px;
 }
 
 .next-3-days .temp {
   font-size: 1.2rem;
   font-weight: 600;
-  color: var(--color1);
+  color: var(--off-white);
 }
 
 /* ==================================== Responsive Design ==================================== */
