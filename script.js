@@ -82,22 +82,25 @@ const weatherApp = {
 
     render: function(weatherInfo) {
         console.log("Full API response:", weatherInfo);
-        this.humidity.textContent = weatherInfo.currentConditions.humidity;
-        this.precipitation.textContent = weatherInfo.currentConditions.precip;
-        this.windSpeed.textContent = weatherInfo.currentConditions.windspeed;
+        this.humidity.textContent = weatherInfo.currentConditions.humidity + '%';
+        this.precipitation.textContent = weatherInfo.currentConditions.precip + '%';
         this.uvIndex.textContent = weatherInfo.currentConditions.uvindex;
         if (this.units === 'F') {
             this.currentTemp.textContent = Math.round(weatherInfo.currentConditions.temp) + '°';
             this.feelsLike.textContent = Math.round(weatherInfo.currentConditions.feelslike) + '°';
             this.hiTemp.textContent = Math.round(weatherInfo.days[0].tempmax) + '°';
             this.loTemp.textContent = Math.round(weatherInfo.days[0].tempmin) + '°';
+            this.windSpeed.textContent = Math.round(weatherInfo.currentConditions.windspeed) + 'mph' ;
         } else {
             this.currentTemp.textContent = Math.round((weatherInfo.currentConditions.temp - 32 ) * (5/9)) + '°';
             this.feelsLike.textContent = Math.round((weatherInfo.currentConditions.feelslike - 32 ) * (5/9)) + '°';
             this.hiTemp.textContent = Math.round((weatherInfo.days[0].tempmax - 32 ) * (5/9)) + '°';
             this.loTemp.textContent = Math.round((weatherInfo.days[0].tempmin - 32 ) * (5/9)) + '°';
+            this.windSpeed.textContent = Math.round(weatherInfo.currentConditions.windspeed * 1.6) + 'km/h' ;
+
         }
         this.chooseImg(weatherInfo);
+        this.currentLocation.textContent = weatherInfo.resolvedAddress;
        this.conditionsDisplay.textContent = weatherInfo.currentConditions.conditions;
     },
 
