@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./reset.css">
     <link rel="stylesheet" href="./styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,54 +12,65 @@
     <title>Weather App</title>
 </head>
 <body>
-    <header>Weather App</header>
-
-    <main>
-        <div class="search-bar">
-            <form id="search-location-form">
-                <label for="search-location">Search Location</label>
-                <input type="text" name="search-location" id="search-location">
-                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+    <header>
+        <div class="search-bar"> 
+            <form id="search-location-form" method="GET">
+                <label for="search-location"><i class="fa-solid fa-magnifying-glass"></i></label>
+                <input type="search" placeholder="Search" aria-label="Search" name="search-location">
             </form>
         </div>
-        <div class="main-grid">
-            <div class="today">
-                <div class="curr-temp">
-                    <p>Temperature</p>
-                    <p class="temp-amount"></p>
+        <span>Weather App</span>
+        <div class="toggle-units"><span>&#8457;</span><span>&#8451;</span></div>
+    </header>
+        
+    <main class="main-grid">
+        <section class="today">
+            <div class="left-side">
+                <div class="temps">
+                    <span class="temp-amount">32°</span>
+                    <div class="hi-low">
+                        <span class="hi-amount">38°</span><p> / </p><span class="low-amount">27°</span>
+                    </div>
                 </div>
-                <div class="feels-like">
-                    <p>Feels Like</p>
-                    <p class="feels-like-amount"></p>
-                </div>
-                <div class="humidity">
-                    <p>Humidity</p>
-                    <p class="humidity-amount"></p>                    
-                </div>
-                <div class="precipitation">
-                    <p>Precipitation</p>
-                    <p class="precipitation-amount"></p>
-                </div>
-                <div class="wind-speed">
-                    <p>Wind Speed</p>
-                    <p class="wind-speed-amount"></p>
+                
+                <div class="location">
+                    <span class="city">City</span><p>, </p><span class="state">State</span>
                 </div>
             </div>
-            <div class="next-3-days">
-                <div class="day-1">
-                    <h3>Tomorrow</h3>
-                    <div class="temp"></div>
+
+            <div class="right-side">
+                <div class="row feels-like">
+                    <p>Feels Like</p><p class="feels-like-amount">—</p>
                 </div>
-                <div class="day-2">
-                    <h3>+2 days</h3>
-                    <div class="temp"></div>
+                <div class="row humidity">
+                    <p>Humidity</p><p class="humidity-amount">—</p>
                 </div>
-                <div class="day-3">
-                    <h3>+3 days</h3>
-                    <div class="temp"></div>
+                <div class="row precipitation">
+                    <p>Precipitation</p><p class="precipitation-amount">—</p>
+                </div>
+                <div class="row wind-speed">
+                    <p>Wind Speed</p><p class="wind-speed-amount">—</p>
+                </div>
+                <div class="row uv-index">
+                    <p>UV Index</p><p class="uv-index-amount">—</p>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <section class="next-3-days">
+            <div class="day-1">
+                <h3>+1</h3>
+                <div class="temp"></div>
+            </div>
+            <div class="day-2">
+                <h3>+2</h3>
+                <div class="temp"></div>
+            </div>
+            <div class="day-3">
+                <h3>+3</h3>
+                <div class="temp"></div>
+            </div>
+        </section>
     </main>
 
     <footer>&copy; SrulyP 2025</footer>
