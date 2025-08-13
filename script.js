@@ -24,12 +24,15 @@ const weatherApp = {
         this.windSpeed = document.querySelector('.wind-speed-amount');
         this.uvIndex= document.querySelector('.uv-index-amount');
         
+        this.weatherIcon = document.querySelector('.weather-icon');
         this.form = document.getElementById('search-location-form');
         this.input = this.form.querySelector('input[name="search-location"]');
 
         this.toggleUnits = document.querySelector('.toggle-units');
         this.fahrenheit = document.querySelector('.F-units');
         this.celsius = document.querySelector('.C-units');
+
+        this.conditionsDisplay = document.querySelector('.conditions');
     },
 
     bindEvents: function() {
@@ -93,14 +96,20 @@ const weatherApp = {
             this.feelsLike.textContent = Math.round((weatherInfo.currentConditions.feelslike - 32 ) * (5/9)) + '°';
             this.hiTemp.textContent = Math.round((weatherInfo.days[0].tempmax - 32 ) * (5/9)) + '°';
             this.loTemp.textContent = Math.round((weatherInfo.days[0].tempmin - 32 ) * (5/9)) + '°';
-            
         }
+        this.chooseImg(weatherInfo);
+       this.conditionsDisplay.textContent = weatherInfo.currentConditions.conditions;
     },
 
     firstSearch: function() {
         this.mainGrid.style.display = 'grid';
         this.emptyState.style.display = 'none';
-    }
+    },
+
+    chooseImg: function(conditions) {
+        const weatherIconURL = conditions.currentConditions.icon;
+        this.weatherIcon.src = './icons/' + weatherIconURL + '.png';
+    },
 }
 
 weatherApp.init();
