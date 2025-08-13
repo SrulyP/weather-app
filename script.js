@@ -9,6 +9,9 @@ const weatherApp = {
     },
     
     cacheDom: function() {
+        this.mainGrid = document.querySelector('.main-grid');
+        this.emptyState = document.querySelector('.empty-state');
+
         this.currentTemp = document.querySelector('.temp-amount');
         this.hiTemp = document.querySelector('.hi-amount');
         this.loTemp = document.querySelector('.low-amount');
@@ -67,6 +70,7 @@ const weatherApp = {
             }
             const weatherInfo = await response.json();
             this.lastLocation = weatherInfo;
+            this.firstSearch();
             this.render(this.lastLocation);
         } catch (err) {
             console.error("Fetch failed:", err);
@@ -93,6 +97,10 @@ const weatherApp = {
         }
     },
 
+    firstSearch: function() {
+        this.mainGrid.style.display = 'grid';
+        this.emptyState.style.display = 'none';
+    }
 }
 
 weatherApp.init();
