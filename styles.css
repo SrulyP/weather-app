@@ -57,7 +57,7 @@ main {
 footer {
   padding: 10px;
   font-weight: 500;
-  color: var(--plum-shade);
+  color: var(--dusty-rose-shade);
   margin-top: auto;
 }
 
@@ -75,7 +75,6 @@ header > span {
   font-weight: 600;
   font-size: 2rem;
   color: var(--off-white);
-  letter-spacing: 0.1rem;
 }
 
 /* ==================================== Controls Section ==================================== */
@@ -327,20 +326,38 @@ header > span {
   background-color: var(--rosewood-tint);
   border: 1px solid var(--dusty-rose);
   border-radius: 12px;
-  padding: 24px 16px;
+  padding: 20px 16px;
   color: var(--off-white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
 }
 
-.next-3-days h3 {
-  font-size: 1.25rem;
+.next-3-days > div:hover {
+  transform: translateY(-2px);
+  background: var(--rosewood);
+}
+
+.next-3-days .date {
+  font-size: 1.1rem;
+  font-weight: 600;
   color: var(--off-white);
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .next-3-days .temp {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 700;
   color: var(--off-white);
+  margin: 8px 0;
+}
+
+.next-3-days img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
 .empty-state {
@@ -371,15 +388,34 @@ header > span {
     padding: 10px;
     padding-top: 40px;
     margin-left: auto;
+    width: 90%;
   }
 
   .today {
     grid-template-columns: 1fr;
-    max-width: 80vw;
+    max-width: none;
   }
 
   .right-side {
     border-left: none;
     padding-left: 0;
+  }
+
+  .next-3-days {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .next-3-days > div {
+    padding: 16px;
+  }
+
+  .next-3-days .temp {
+    font-size: 1.6rem;
+  }
+
+  .next-3-days img {
+    width: 50px;
+    height: 50px;
   }
 }
