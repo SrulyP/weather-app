@@ -124,10 +124,9 @@ header > span {
 
 .toggle-units {
   font-size: 1.2rem;
-  color: var(--charcoal);
   display: flex;
   gap: 0;
-  background-color: var(--peach-tint);
+  background-color: var(--dusty-rose-tint);
   padding: 0;
   border: 2px solid var(--dusty-rose);
   border-radius: 18px;
@@ -135,6 +134,7 @@ header > span {
   justify-self: end;
   overflow: hidden;
   width: 110px;
+  color: var(--off-white);
 }
 
 .F-units,
@@ -145,22 +145,19 @@ header > span {
   border: none;
   background: transparent;
   font-weight: 600;
-  color: var(--charcoal);
   user-select: none;
 }
 
 .F-units.active,
 .C-units.active {
   background-color: var(--rosewood-tint);
-  color: var(--off-white);
   font-weight: 700;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .F-units:not(.active):hover,
 .C-units:not(.active):hover {
-  background-color: var(--peach-shade);
-  color: var(--off-white);
+  background-color: var(--rosewood);
   font-weight: 700;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
 }
