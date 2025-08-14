@@ -81,8 +81,8 @@ const weatherApp = {
     render: function(weatherInfo) {
         console.log("Full API response:", weatherInfo);
         
-        this.currentLocation.textContent = this.formatValue(weatherInfo.resolvedAddress);
-        this.conditionsDisplay.textContent = this.formatValue(weatherInfo.currentConditions.conditions);
+        this.currentLocation.textContent = weatherInfo.resolvedAddress;
+        this.conditionsDisplay.textContent = weatherInfo.currentConditions.conditions;
         this.humidity.textContent = this.formatValue(weatherInfo.currentConditions.humidity, '%');
         this.precipitation.textContent = this.formatValue(weatherInfo.currentConditions.precip, '%');
         this.uvIndex.textContent = this.formatValue(weatherInfo.currentConditions.uvindex);
