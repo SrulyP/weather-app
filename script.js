@@ -16,8 +16,6 @@ const weatherApp = {
         this.hiTemp = document.querySelector('.hi-amount');
         this.loTemp = document.querySelector('.low-amount');
         this.currentLocation = document.querySelector('.location');
-        this.currentCity = document.querySelector('.city');
-        this.currentState = document.querySelector('.state');
         this.feelsLike = document.querySelector('.feels-like-amount');
         this.humidity = document.querySelector('.humidity-amount');
         this.precipitation = document.querySelector('.precipitation-amount');
@@ -82,28 +80,65 @@ const weatherApp = {
 
     render: function(weatherInfo) {
         console.log("Full API response:", weatherInfo);
-        this.humidity.textContent = weatherInfo.currentConditions.humidity + '%';
-        this.precipitation.textContent = weatherInfo.currentConditions.precip + '%';
-        this.uvIndex.textContent = weatherInfo.currentConditions.uvindex;
+        
+        this.currentLocation.textContent = this.formatValue(weatherInfo.resolvedAddress);
+        this.conditionsDisplay.textContent = this.formatValue(weatherInfo.currentConditions.conditions);
+        this.humidity.textContent = this.formatValue(weatherInfo.currentConditions.humidity, '%');
+        this.precipitation.textContent = this.formatValue(weatherInfo.currentConditions.precip, '%');
+        this.uvIndex.textContent = this.formatValue(weatherInfo.currentConditions.uvindex);
+        
         if (this.units === 'F') {
-            this.currentTemp.textContent = Math.round(weatherInfo.currentConditions.temp) + '°';
-            this.feelsLike.textContent = Math.round(weatherInfo.currentConditions.feelslike) + '°';
-            this.hiTemp.textContent = Math.round(weatherInfo.days[0].tempmax) + '°';
-            this.loTemp.textContent = Math.round(weatherInfo.days[0].tempmin) + '°';
-            this.windSpeed.textContent = Math.round(weatherInfo.currentConditions.windspeed) + 'mph' ;
+            this.renderFahrenheit(weatherInfo);
         } else {
-            this.currentTemp.textContent = Math.round((weatherInfo.currentConditions.temp - 32 ) * (5/9)) + '°';
-            this.feelsLike.textContent = Math.round((weatherInfo.currentConditions.feelslike - 32 ) * (5/9)) + '°';
-            this.hiTemp.textContent = Math.round((weatherInfo.days[0].tempmax - 32 ) * (5/9)) + '°';
-            this.loTemp.textContent = Math.round((weatherInfo.days[0].tempmin - 32 ) * (5/9)) + '°';
-            this.windSpeed.textContent = Math.round(weatherInfo.currentConditions.windspeed * 1.6) + 'km/h' ;
-
+            this.renderCelsius(weatherInfo);
         }
         this.chooseImg(weatherInfo);
-        this.currentLocation.textContent = weatherInfo.resolvedAddress;
-       this.conditionsDisplay.textContent = weatherInfo.currentConditions.conditions;
     },
 
+    renderCelsius: function(weatherInfo) {
+        this.currentTemp.textContent = this.formatValue(
+            Math.round((weatherInfo.currentConditions.temp - 32) * (5/9)), '°'
+        );
+        this.feelsLike.textContent = this.formatValue(
+            Math.round((weatherInfo.currentConditions.feelslike - 32) * (5/9)), '°'
+        );
+        this.hiTemp.textContent = this.formatValue(
+            Math.round((weatherInfo.days[0].tempmax - 32) * (5/9)), '°'
+        );
+        this.loTemp.textContent = this.formatValue(
+            Math.round((weatherInfo.days[0].tempmin - 32) * (5/9)), '°'
+        );
+        this.windSpeed.textContent = this.formatValue(
+            Math.round(weatherInfo.currentConditions.windspeed * 1.6), 'km/h'
+        );
+    },
+
+    renderFahrenheit: function(weatherInfo) {
+        this.currentTemp.textContent = this.formatValue(
+            Math.round(weatherInfo.currentConditions.temp), '°'
+        );
+        this.feelsLike.textContent = this.formatValue(
+            Math.round(weatherInfo.currentConditions.feelslike), '°'
+        );
+        this.hiTemp.textContent = this.formatValue(
+            Math.round(weatherInfo.days[0].tempmax), '°'
+        );
+        this.loTemp.textContent = this.formatValue(
+            Math.round(weatherInfo.days[0].tempmin), '°'
+        );
+        this.windSpeed.textContent = this.formatValue(
+            Math.round(weatherInfo.currentConditions.windspeed), 'mph'
+        );
+    },
+
+    formatValue: function(value, unit = '') {
+        if (value != null && !isNaN(value)) {
+            return value + unit;
+        } else {
+            return 'N/A';
+        }
+    },
+    
     firstSearch: function() {
         this.mainGrid.style.display = 'grid';
         this.emptyState.style.display = 'none';
