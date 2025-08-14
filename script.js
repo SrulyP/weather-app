@@ -35,6 +35,16 @@ const weatherApp = {
         this.dayOne = document.querySelector('.day-1');
         this.dayTwo = document.querySelector('.day-2');
         this.dayThree = document.querySelector('.day-3');
+
+        this.dayOneTemp = this.dayOne.querySelector('.temp');
+        this.dayTwoTemp = this.dayTwo.querySelector('.temp');
+        this.dayThreeTemp = this.dayThree.querySelector('.temp');
+        this.dayOneIcon = this.dayOne.querySelector('img');
+        this.dayTwoIcon = this.dayTwo.querySelector('img');
+        this.dayThreeIcon = this.dayThree.querySelector('img');
+        this.dayOneDate = this.dayOne.querySelector('.date');
+        this.dayTwoDate = this.dayTwo.querySelector('.date');
+        this.dayThreeDate = this.dayThree.querySelector('.date');
     },
 
     bindEvents: function () {
@@ -68,10 +78,7 @@ const weatherApp = {
     locationSearch: async function (location) {
         try {
             location = encodeURIComponent(location);
-            const url =
-                'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/' +
-                location +
-                '?unitGroup=us&key=HSAU33NGAHW4EDPY5995Q4MUQ&contentType=json';
+            const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=us&key=HSAU33NGAHW4EDPY5995Q4MUQ&contentType=json`;
             const response = await fetch(url, { method: 'GET' });
             if (!response.ok) {
                 throw new Error(`Error: status ${response.status}`);
@@ -103,12 +110,40 @@ const weatherApp = {
             weatherInfo.currentConditions.uvindex
         );
 
+        this.renderNextDates(weatherInfo);
+
         if (this.units === 'F') {
             this.renderFahrenheit(weatherInfo);
         } else {
             this.renderCelsius(weatherInfo);
         }
         this.chooseImg(weatherInfo);
+    },
+
+    renderNextDates: function (weatherInfo) {
+        const formatDate = (dateString) => {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', {
+                month: 'short',
+                day: 'numeric',
+            });
+        };
+
+        if (weatherInfo.days.length > 1) {
+            this.dayOneDate.textContent = formatDate(
+                weatherInfo.days[1].datetime
+            );
+        }
+        if (weatherInfo.days.length > 2) {
+            this.dayTwoDate.textContent = formatDate(
+                weatherInfo.days[2].datetime
+            );
+        }
+        if (weatherInfo.days.length > 3) {
+            this.dayThreeDate.textContent = formatDate(
+                weatherInfo.days[3].datetime
+            );
+        }
     },
 
     renderCelsius: function (weatherInfo) {
@@ -134,6 +169,25 @@ const weatherApp = {
             Math.round(weatherInfo.currentConditions.windspeed * 1.6),
             'km/h'
         );
+
+        if (weatherInfo.days.length > 1) {
+            this.dayOneTemp.textContent = this.formatValue(
+                Math.round((weatherInfo.days[1].temp - 32) * (5 / 9)),
+                '°'
+            );
+        }
+        if (weatherInfo.days.length > 2) {
+            this.dayTwoTemp.textContent = this.formatValue(
+                Math.round((weatherInfo.days[2].temp - 32) * (5 / 9)),
+                '°'
+            );
+        }
+        if (weatherInfo.days.length > 3) {
+            this.dayThreeTemp.textContent = this.formatValue(
+                Math.round((weatherInfo.days[3].temp - 32) * (5 / 9)),
+                '°'
+            );
+        }
     },
 
     renderFahrenheit: function (weatherInfo) {
@@ -157,6 +211,25 @@ const weatherApp = {
             Math.round(weatherInfo.currentConditions.windspeed),
             'mph'
         );
+
+        if (weatherInfo.days.length > 1) {
+            this.dayOneTemp.textContent = this.formatValue(
+                Math.round(weatherInfo.days[1].temp),
+                '°'
+            );
+        }
+        if (weatherInfo.days.length > 2) {
+            this.dayTwoTemp.textContent = this.formatValue(
+                Math.round(weatherInfo.days[2].temp),
+                '°'
+            );
+        }
+        if (weatherInfo.days.length > 3) {
+            this.dayThreeTemp.textContent = this.formatValue(
+                Math.round(weatherInfo.days[3].temp),
+                '°'
+            );
+        }
     },
 
     formatValue: function (value, unit = '') {
@@ -175,6 +248,19 @@ const weatherApp = {
     chooseImg: function (conditions) {
         const weatherIconURL = conditions.currentConditions.icon;
         this.weatherIcon.src = './icons/' + weatherIconURL + '.png';
+
+        if (conditions.days.length > 1) {
+            const weatherIconDayOne = conditions.days[1].icon;
+            this.dayOneIcon.src = './icons/' + weatherIconDayOne + '.png';
+        }
+        if (conditions.days.length > 2) {
+            const weatherIconDayTwo = conditions.days[2].icon;
+            this.dayTwoIcon.src = './icons/' + weatherIconDayTwo + '.png';
+        }
+        if (conditions.days.length > 3) {
+            const weatherIconDayThree = conditions.days[3].icon;
+            this.dayThreeIcon.src = './icons/' + weatherIconDayThree + '.png';
+        }
     },
 };
 
