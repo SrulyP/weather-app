@@ -1,179 +1,181 @@
 const weatherApp = {
-  units: "F",
-  lastLocation: null,
+    units: "F",
+    lastLocation: null,
 
-  init: function () {
-    this.cacheDom();
-    this.bindEvents();
-  },
+    init: function () {
+        this.cacheDom();
+        this.bindEvents();
+    },
 
-  cacheDom: function () {
-    this.mainGrid = document.querySelector(".main-grid");
-    this.emptyState = document.querySelector(".empty-state");
+    cacheDom: function () {
+        this.mainGrid = document.querySelector(".main-grid");
+        this.emptyState = document.querySelector(".empty-state");
 
-    this.currentTemp = document.querySelector(".temp-amount");
-    this.hiTemp = document.querySelector(".hi-amount");
-    this.loTemp = document.querySelector(".low-amount");
-    this.currentLocation = document.querySelector(".location");
-    this.feelsLike = document.querySelector(".feels-like-amount");
-    this.humidity = document.querySelector(".humidity-amount");
-    this.precipitation = document.querySelector(".precipitation-amount");
-    this.windSpeed = document.querySelector(".wind-speed-amount");
-    this.uvIndex = document.querySelector(".uv-index-amount");
+        this.currentTemp = document.querySelector(".temp-amount");
+        this.hiTemp = document.querySelector(".hi-amount");
+        this.loTemp = document.querySelector(".low-amount");
+        this.currentLocation = document.querySelector(".location");
+        this.feelsLike = document.querySelector(".feels-like-amount");
+        this.humidity = document.querySelector(".humidity-amount");
+        this.precipitation = document.querySelector(".precipitation-amount");
+        this.windSpeed = document.querySelector(".wind-speed-amount");
+        this.uvIndex = document.querySelector(".uv-index-amount");
 
-    this.weatherIcon = document.querySelector(".weather-icon");
-    this.form = document.getElementById("search-location-form");
-    this.input = this.form.querySelector('input[name="search-location"]');
+        this.weatherIcon = document.querySelector(".weather-icon");
+        this.form = document.getElementById("search-location-form");
+        this.input = this.form.querySelector('input[name="search-location"]');
 
-    this.toggleUnits = document.querySelector(".toggle-units");
-    this.fahrenheit = document.querySelector(".F-units");
-    this.celsius = document.querySelector(".C-units");
+        this.toggleUnits = document.querySelector(".toggle-units");
+        this.fahrenheit = document.querySelector(".F-units");
+        this.celsius = document.querySelector(".C-units");
 
-    this.conditionsDisplay = document.querySelector(".conditions");
+        this.conditionsDisplay = document.querySelector(".conditions");
 
-    this.nextDays = document.querySelector(".next-3-days");
-    this.dayOne = document.querySelector(".day-1");
-    this.dayTwo = document.querySelector(".day-2");
-    this.dayThree = document.querySelector(".day-3");
-  },
+        this.nextDays = document.querySelector(".next-3-days");
+        this.dayOne = document.querySelector(".day-1");
+        this.dayTwo = document.querySelector(".day-2");
+        this.dayThree = document.querySelector(".day-3");
+    },
 
-  bindEvents: function () {
-    this.form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const value = this.input.value.trim();
-      if (value) {
-        this.locationSearch(value);
-      }
-    });
+    bindEvents: function () {
+        this.form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const value = this.input.value.trim();
+            if (value) {
+                this.locationSearch(value);
+            }
+        });
 
-    this.fahrenheit.addEventListener("click", () => {
-      this.units = "F";
-      this.fahrenheit.classList.add("active");
-      this.celsius.classList.remove("active");
-      if (this.lastLocation) {
-        this.render(this.lastLocation);
-      }
-    });
+        this.fahrenheit.addEventListener("click", () => {
+            this.units = "F";
+            this.fahrenheit.classList.add("active");
+            this.celsius.classList.remove("active");
+            if (this.lastLocation) {
+                this.render(this.lastLocation);
+            }
+        });
 
-    this.celsius.addEventListener("click", () => {
-      this.units = "C";
-      this.celsius.classList.add("active");
-      this.fahrenheit.classList.remove("active");
-      if (this.lastLocation) {
-        this.render(this.lastLocation);
-      }
-    });
-  },
+        this.celsius.addEventListener("click", () => {
+            this.units = "C";
+            this.celsius.classList.add("active");
+            this.fahrenheit.classList.remove("active");
+            if (this.lastLocation) {
+                this.render(this.lastLocation);
+            }
+        });
+    },
 
-  locationSearch: async function (location) {
-    try {
-      location = encodeURIComponent(location);
-      const url =
-        "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" +
-        location +
-        "?unitGroup=us&key=HSAU33NGAHW4EDPY5995Q4MUQ&contentType=json";
-      const response = await fetch(url, { method: "GET" });
-      if (!response.ok) {
-        throw new Error(`Error: status ${response.status}`);
-      }
-      const weatherInfo = await response.json();
-      this.lastLocation = weatherInfo;
-      this.firstSearch();
-      this.render(this.lastLocation);
-    } catch (err) {
-      console.error("Fetch failed:", err);
-    }
-  },
+    locationSearch: async function (location) {
+        try {
+            location = encodeURIComponent(location);
+            const url =
+                "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" +
+                location +
+                "?unitGroup=us&key=HSAU33NGAHW4EDPY5995Q4MUQ&contentType=json";
+            const response = await fetch(url, { method: "GET" });
+            if (!response.ok) {
+                throw new Error(`Error: status ${response.status}`);
+            }
+            const weatherInfo = await response.json();
+            this.lastLocation = weatherInfo;
+            this.firstSearch();
+            this.render(this.lastLocation);
+        } catch (err) {
+            console.error("Fetch failed:", err);
+        }
+    },
 
-  render: function (weatherInfo) {
-    console.log("Full API response:", weatherInfo);
+    render: function (weatherInfo) {
+        console.log("Full API response:", weatherInfo);
 
-    this.currentLocation.textContent = weatherInfo.resolvedAddress;
-    this.conditionsDisplay.textContent =
-      weatherInfo.currentConditions.conditions;
-    this.humidity.textContent = this.formatValue(
-      weatherInfo.currentConditions.humidity,
-      "%",
-    );
-    this.precipitation.textContent = this.formatValue(
-      weatherInfo.currentConditions.precip,
-      "%",
-    );
-    this.uvIndex.textContent = this.formatValue(
-      weatherInfo.currentConditions.uvindex,
-    );
+        this.currentLocation.textContent = weatherInfo.resolvedAddress;
+        this.conditionsDisplay.textContent =
+            weatherInfo.currentConditions.conditions;
+        this.humidity.textContent = this.formatValue(
+            weatherInfo.currentConditions.humidity,
+            "%",
+        );
+        this.precipitation.textContent = this.formatValue(
+            weatherInfo.currentConditions.precip,
+            "%",
+        );
+        this.uvIndex.textContent = this.formatValue(
+            weatherInfo.currentConditions.uvindex,
+        );
 
-    if (this.units === "F") {
-      this.renderFahrenheit(weatherInfo);
-    } else {
-      this.renderCelsius(weatherInfo);
-    }
-    this.chooseImg(weatherInfo);
-  },
+        if (this.units === "F") {
+            this.renderFahrenheit(weatherInfo);
+        } else {
+            this.renderCelsius(weatherInfo);
+        }
+        this.chooseImg(weatherInfo);
+    },
 
-  renderCelsius: function (weatherInfo) {
-    this.currentTemp.textContent = this.formatValue(
-      Math.round((weatherInfo.currentConditions.temp - 32) * (5 / 9)),
-      "°",
-    );
-    this.feelsLike.textContent = this.formatValue(
-      Math.round((weatherInfo.currentConditions.feelslike - 32) * (5 / 9)),
-      "°",
-    );
-    this.hiTemp.textContent = this.formatValue(
-      Math.round((weatherInfo.days[0].tempmax - 32) * (5 / 9)),
-      "°",
-    );
-    this.loTemp.textContent = this.formatValue(
-      Math.round((weatherInfo.days[0].tempmin - 32) * (5 / 9)),
-      "°",
-    );
-    this.windSpeed.textContent = this.formatValue(
-      Math.round(weatherInfo.currentConditions.windspeed * 1.6),
-      "km/h",
-    );
-  },
+    renderCelsius: function (weatherInfo) {
+        this.currentTemp.textContent = this.formatValue(
+            Math.round((weatherInfo.currentConditions.temp - 32) * (5 / 9)),
+            "°",
+        );
+        this.feelsLike.textContent = this.formatValue(
+            Math.round(
+                (weatherInfo.currentConditions.feelslike - 32) * (5 / 9),
+            ),
+            "°",
+        );
+        this.hiTemp.textContent = this.formatValue(
+            Math.round((weatherInfo.days[0].tempmax - 32) * (5 / 9)),
+            "°",
+        );
+        this.loTemp.textContent = this.formatValue(
+            Math.round((weatherInfo.days[0].tempmin - 32) * (5 / 9)),
+            "°",
+        );
+        this.windSpeed.textContent = this.formatValue(
+            Math.round(weatherInfo.currentConditions.windspeed * 1.6),
+            "km/h",
+        );
+    },
 
-  renderFahrenheit: function (weatherInfo) {
-    this.currentTemp.textContent = this.formatValue(
-      Math.round(weatherInfo.currentConditions.temp),
-      "°",
-    );
-    this.feelsLike.textContent = this.formatValue(
-      Math.round(weatherInfo.currentConditions.feelslike),
-      "°",
-    );
-    this.hiTemp.textContent = this.formatValue(
-      Math.round(weatherInfo.days[0].tempmax),
-      "°",
-    );
-    this.loTemp.textContent = this.formatValue(
-      Math.round(weatherInfo.days[0].tempmin),
-      "°",
-    );
-    this.windSpeed.textContent = this.formatValue(
-      Math.round(weatherInfo.currentConditions.windspeed),
-      "mph",
-    );
-  },
+    renderFahrenheit: function (weatherInfo) {
+        this.currentTemp.textContent = this.formatValue(
+            Math.round(weatherInfo.currentConditions.temp),
+            "°",
+        );
+        this.feelsLike.textContent = this.formatValue(
+            Math.round(weatherInfo.currentConditions.feelslike),
+            "°",
+        );
+        this.hiTemp.textContent = this.formatValue(
+            Math.round(weatherInfo.days[0].tempmax),
+            "°",
+        );
+        this.loTemp.textContent = this.formatValue(
+            Math.round(weatherInfo.days[0].tempmin),
+            "°",
+        );
+        this.windSpeed.textContent = this.formatValue(
+            Math.round(weatherInfo.currentConditions.windspeed),
+            "mph",
+        );
+    },
 
-  formatValue: function (value, unit = "") {
-    if (value != null && !isNaN(value)) {
-      return value + unit;
-    } else {
-      return "N/A";
-    }
-  },
+    formatValue: function (value, unit = "") {
+        if (value != null && !isNaN(value)) {
+            return value + unit;
+        } else {
+            return "N/A";
+        }
+    },
 
-  firstSearch: function () {
-    this.mainGrid.style.display = "grid";
-    this.emptyState.style.display = "none";
-  },
+    firstSearch: function () {
+        this.mainGrid.style.display = "grid";
+        this.emptyState.style.display = "none";
+    },
 
-  chooseImg: function (conditions) {
-    const weatherIconURL = conditions.currentConditions.icon;
-    this.weatherIcon.src = "./icons/" + weatherIconURL + ".png";
-  },
+    chooseImg: function (conditions) {
+        const weatherIconURL = conditions.currentConditions.icon;
+        this.weatherIcon.src = "./icons/" + weatherIconURL + ".png";
+    },
 };
 
 weatherApp.init();
