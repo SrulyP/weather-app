@@ -170,6 +170,15 @@ header > span {
   background-color: var(--rosewood-shade);
 }
 
+.F-units.active,
+.F-units:not(.active):hover {
+  border-radius: 14px 0 0 14px;
+}
+
+.C-units.active,
+.C-units:not(.active):hover {
+  border-radius: 0 14px 14px 0;
+}
 
 
 /* ==================================== Main Grid ==================================== */
@@ -257,34 +266,50 @@ header > span {
 
 /* ------------ Right side ------------*/
 
+
 .right-side {
   display: grid;
   grid-template-rows: repeat(5, 1fr);
-  gap: 14px;
-  padding-left: 24px;
-  border-left: 2px solid var(--dusty-rose);
+  gap: 0;
+  padding: 16px;
+  border-radius: 25px;
+  background-color: var(--rosewood-tint);
+  border: 1px solid var(--dusty-rose);
 }
 
 .right-side .row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: var(--rosewood-tint);
-  border: 1px solid var(--dusty-rose);
-  border-radius: 40px;
-  padding: 2px 25px;
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
 }
 
-.right-side .row p:first-child { 
-  font-weight: 500; 
-  font-size: 1.2rem;
-  color: var(--off-white); 
-  margin-right: 5px;
+.right-side .row:last-child {
+  border-bottom: none;
 }
 
-.right-side .row p:last-child  { 
+.right-side .row:first-child:hover {
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+}
+
+.right-side .row:last-child:hover {
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+
+
+}
+
+.right-side .row:hover {
+  background: rgba(255,255,255,0.12);
+  transform: translateY(-2px);
+}
+
+.right-side .row p:first-child,
+.right-side .row p:last-child {
   font-size: 1.2rem;
-  font-weight: 600; 
+  font-weight: 600;
   color: var(--off-white);
 }
 
