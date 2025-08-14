@@ -1,111 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./reset.css" />
-    <link rel="stylesheet" href="./styles.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
-    <script
-      src="https://kit.fontawesome.com/8716932c34.js"
-      crossorigin="anonymous"
-    ></script>
-    <title>Weather App</title>
-  </head>
-  <body>
-    <header>
-      <span>Weather App</span>
-    </header>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./reset.css" />
+        <link rel="stylesheet" href="./styles.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+            rel="stylesheet"
+        />
+        <script
+            src="https://kit.fontawesome.com/8716932c34.js"
+            crossorigin="anonymous"
+        ></script>
+        <title>Weather App</title>
+    </head>
+    <body>
+        <header>
+            <span>Weather App</span>
+        </header>
 
-    <div class="controls-section">
-      <div class="search-bar">
-        <form id="search-location-form" method="GET">
-          <label for="search-location"
-            ><i class="fa-solid fa-magnifying-glass"></i
-          ></label>
-          <input
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-            name="search-location"
-          />
-        </form>
-      </div>
-      <div class="toggle-units">
-        <span class="F-units active">&#8457;</span
-        ><span class="C-units">&#8451;</span>
-      </div>
-    </div>
-
-    <div class="empty-state">
-      <p>Search for a city to get started</p>
-      <img src="/icons/rainbow.png" alt="rainbow" />
-    </div>
-    <main class="main-grid" style="display: none">
-      <section class="today">
-        <div class="left-side">
-          <div class="temps">
-            <div class="temp-and-hi-low">
-              <span class="temp-amount">32°</span>
-              <div class="hi-low">
-                <span class="hi-amount">38°</span>
-                <p>/</p>
-                <span class="low-amount">27°</span>
-              </div>
+        <div class="controls-section">
+            <div class="search-bar">
+                <form id="search-location-form" method="GET">
+                    <label for="search-location"
+                        ><i class="fa-solid fa-magnifying-glass"></i
+                    ></label>
+                    <input
+                        type="search"
+                        placeholder="Search"
+                        aria-label="Search"
+                        name="search-location"
+                    />
+                </form>
             </div>
-            <span class="conditions">Clear</span>
-          </div>
-          <img src="" alt="Weather Icon" class="weather-icon" />
-          <div class="location"></div>
+            <div class="toggle-units">
+                <span class="F-units active">&#8457;</span
+                ><span class="C-units">&#8451;</span>
+            </div>
         </div>
 
-        <div class="right-side">
-          <div class="row feels-like">
-            <p>Feels Like</p>
-            <p class="feels-like-amount">—</p>
-          </div>
-          <div class="row humidity">
-            <p>Humidity</p>
-            <p class="humidity-amount">—</p>
-          </div>
-          <div class="row precipitation">
-            <p>Precipitation</p>
-            <p class="precipitation-amount">—</p>
-          </div>
-          <div class="row wind-speed">
-            <p>Wind Speed</p>
-            <p class="wind-speed-amount">—</p>
-          </div>
-          <div class="row uv-index">
-            <p>UV Index</p>
-            <p class="uv-index-amount">—</p>
-          </div>
+        <div class="empty-state">
+            <p>Search for a city to get started</p>
+            <img src="/icons/rainbow.png" alt="rainbow" />
         </div>
-      </section>
+        <main class="main-grid" style="display: none">
+            <section class="today">
+                <div class="left-side">
+                    <div class="temps">
+                        <div class="temp-and-hi-low">
+                            <span class="temp-amount">32°</span>
+                            <div class="hi-low">
+                                <span class="hi-amount">38°</span>
+                                <p>/</p>
+                                <span class="low-amount">27°</span>
+                            </div>
+                        </div>
+                        <span class="conditions">Clear</span>
+                    </div>
+                    <img src="" alt="Weather Icon" class="weather-icon" />
+                    <div class="location"></div>
+                </div>
 
-      <section class="next-3-days">
-        <div class="day-1">
-          <h3>+1</h3>
-          <div class="temp"></div>
-        </div>
-        <div class="day-2">
-          <h3>+2</h3>
-          <div class="temp"></div>
-        </div>
-        <div class="day-3">
-          <h3>+3</h3>
-          <div class="temp"></div>
-        </div>
-      </section>
-    </main>
+                <div class="right-side">
+                    <div class="row feels-like">
+                        <p>Feels Like</p>
+                        <p class="feels-like-amount">—</p>
+                    </div>
+                    <div class="row humidity">
+                        <p>Humidity</p>
+                        <p class="humidity-amount">—</p>
+                    </div>
+                    <div class="row precipitation">
+                        <p>Precipitation</p>
+                        <p class="precipitation-amount">—</p>
+                    </div>
+                    <div class="row wind-speed">
+                        <p>Wind Speed</p>
+                        <p class="wind-speed-amount">—</p>
+                    </div>
+                    <div class="row uv-index">
+                        <p>UV Index</p>
+                        <p class="uv-index-amount">—</p>
+                    </div>
+                </div>
+            </section>
 
-    <footer>&copy; SrulyP 2025 | icons from iconixar</footer>
+            <section class="next-3-days">
+                <div class="day-1">
+                    <h3>+1</h3>
+                    <div class="temp"></div>
+                </div>
+                <div class="day-2">
+                    <h3>+2</h3>
+                    <div class="temp"></div>
+                </div>
+                <div class="day-3">
+                    <h3>+3</h3>
+                    <div class="temp"></div>
+                </div>
+            </section>
+        </main>
 
-    <script src="script.js"></script>
-  </body>
+        <footer>&copy; SrulyP 2025 | icons from iconixar</footer>
+
+        <script src="script.js"></script>
+    </body>
 </html>
