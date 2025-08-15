@@ -11,6 +11,7 @@ const weatherApp = {
         this.mainGrid = document.querySelector('.main-grid');
         this.emptyState = document.querySelector('.empty-state');
 
+        this.currentDate = document.querySelector('.current-date');
         this.currentTemp = document.querySelector('.temp-amount');
         this.hiTemp = document.querySelector('.hi-amount');
         this.loTemp = document.querySelector('.low-amount');
@@ -128,6 +129,8 @@ const weatherApp = {
                 day: 'numeric',
             });
         };
+
+        this.currentDate.textContent = formatDate(weatherInfo.days[0].datetime);
 
         if (weatherInfo.days.length > 1) {
             this.dayOneDate.textContent = formatDate(
