@@ -83,9 +83,9 @@ header > span {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 25px;
+  gap: 30px;
   padding: 0 40px;
-  padding-top: 15px;
+  padding-top: 30px;
   width: 70%;
   max-width: 1200px;
   margin: 0 auto;
@@ -223,7 +223,13 @@ header > span {
   color: var(--plum-dark);
 }
 
-.conditions {
+.temp-and-hi-low {
+  display: flex;
+  flex-direction: column;
+}
+
+.conditions,
+.current-date {
   font-size: 1.8rem;
   font-weight: 500;
   color: var(--plum-dark);
@@ -266,17 +272,19 @@ header > span {
   display: grid;
   grid-template-rows: repeat(5, 1fr);
   gap: 0;
-  padding: 16px;
-  border-radius: 25px;
+  padding: 0;
+  border-radius: 15px;
   background-color: var(--rosewood-tint);
-  border: 1px solid var(--dusty-rose);
+  border: 2px solid var(--peach-rose);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
+
 
 .right-side .row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 16px;
+  padding: 16px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
@@ -284,19 +292,8 @@ header > span {
   border-bottom: none;
 }
 
-.right-side .row:first-child:hover {
-  border-top-left-radius: 18px;
-  border-top-right-radius: 18px;
-}
-
-.right-side .row:last-child:hover {
-  border-bottom-left-radius: 18px;
-  border-bottom-right-radius: 18px;
-}
-
 .right-side .row:hover {
   background: rgba(255, 255, 255, 0.12);
-  transform: translateY(-2px);
 }
 
 .right-side .row p:first-child,
@@ -367,17 +364,22 @@ header > span {
 }
 
 .empty-state img {
-  width: 30%;
+  width: 40%;
   height: auto;
   margin: 0 auto;
+  margin-top: 50px;
 }
 
 /* ==================================== Responsive Design ==================================== */
 
 @media (max-width: 720px) {
+  .empty-state img {
+    min-width: 300px;
+  }
+
   .controls-section {
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
     padding: 20px;
   }
 
@@ -395,7 +397,6 @@ header > span {
 
   .right-side {
     border-left: none;
-    padding-left: 0;
   }
 
   .next-3-days {
